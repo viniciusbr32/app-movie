@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  min-width: 0px;
+}
+
+body {
+  background: #4682b4;
+}
