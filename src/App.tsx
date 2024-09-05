@@ -12,6 +12,7 @@ const App = () => {
         const { data } = await axios.get('https://api.themoviedb.org/3/discover/movie', {
           params: {
             api_key: 'a0ef49e706577a96426767d29a7e956c',
+            language: 'pt-BR',
           },
         });
         console.log(data.results);
