@@ -1,19 +1,21 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { movies } from './types/movie';
+import Movies from './components/movies';
+import { Movie } from './types/movie';
 
 const App = () => {
-  const [movies, setMovies] = useState<movies[]>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
     const getMovies = async () => {
       try {
-        const response = await axios.get('https://api.themoviedb.org/3/discover/movie', {
+        const { data } = await axios.get('https://api.themoviedb.org/3/discover/movie', {
           params: {
             api_key: 'a0ef49e706577a96426767d29a7e956c',
           },
         });
-        setMovies(response.data.results);
+        console.log(data.results);
+        setMovies(data.results);
       } catch (error) {
         console.error('Erro ao buscar filme', error);
       }
@@ -27,12 +29,9 @@ const App = () => {
         <h1 className="font-bold text-2xl text-white text-center py-5">Filmes</h1>
       </header>
 
-      <div>
-        {movies?.map((movie) => (
-          <div key={movie.id}>
-            <p>{movie.title}</p>
-            <p>{movie.overview}</p>
-          </div>
+      <div className=" grid p-5 grid-cols-2 gap-3  grid-rows-3">
+        {movies.map((movie) => (
+          <Movies movie={movie} key={movie.id} />
         ))}
       </div>
     </>
