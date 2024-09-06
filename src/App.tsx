@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Movies from './components/movies';
 import { Movie } from './types/movie';
+import { useNavigate } from 'react-router-dom';
 
 const App = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -24,6 +25,12 @@ const App = () => {
     getMovies();
   }, []);
 
+  const navigate = useNavigate();
+
+  const handleClick = (id: number) => {
+    navigate(`/movie/${id}`);
+  };
+
   return (
     <>
       <header className="bg-sky-950 ">
@@ -32,7 +39,9 @@ const App = () => {
 
       <div className=" grid p-5 grid-cols-2 gap-3  grid-rows-3">
         {movies.map((movie) => (
-          <Movies movie={movie} key={movie.id} />
+          <button onClick={() => handleClick(movie.id)}>
+            <Movies movie={movie} key={movie.id} />
+          </button>
         ))}
       </div>
     </>

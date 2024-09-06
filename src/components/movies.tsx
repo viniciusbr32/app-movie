@@ -10,21 +10,23 @@ const Movies = ({ movie }: movieProps) => {
   const numStars = Math.round(movie.vote_average / 2);
 
   return (
-    <div className="w-full ">
-      <img className="rounded-lg" src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={movie.title} />
-      <div className="pl-2">
-        <p className="truncate text-white font-bold">{movie.title}</p>
+    <div className="relative w-full">
+      <img
+        className="rounded-lg w-full"
+        src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+        alt={movie.title}
+      />
+      <div className="absolute bottom-0 left-0 text-sm  bg-black bg-opacity-80 pl-1 pb-2 text-white w-full rounded-b-lg">
+        <p className="truncate font-bold">{movie.title}</p>
         <div className="flex items-center">
-          {/* Renderiza estrelas cheias */}
           {Array.from({ length: numStars }, (_, index) => (
-            <IoStarSharp key={`full-${index}`} fill="yellow" />
+            <IoStarSharp key={`full-${index}`} fill="yellow" className="text-yellow-400 shadow-md" />
           ))}
-          {/* Renderiza estrelas vazias */}
+
           {Array.from({ length: 5 - numStars }, (_, index) => (
-            <RiStarSLine key={`empty-${index}`} />
+            <RiStarSLine key={`empty-${index}`} className="text-gray-400 shadow-md" />
           ))}
         </div>
-        <p className="font-bold text-white">{movie.vote_count} avaliaçoes</p>
       </div>
     </div>
   );
