@@ -3,12 +3,14 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { MovieDetailsProps } from '../types/movie';
+import { IoStarSharp } from 'react-icons/io5';
+import { RiStarSLine } from 'react-icons/ri';
 
 const MovieDetails = () => {
   const { id } = useParams();
 
   const [movie, setMovie] = useState<MovieDetailsProps | null>(null);
-  console.log(movie);
+  const numStars: number = Math.round((movie?.vote_average ?? 0) / 2);
 
   useEffect(() => {
     const getMovies = async () => {
@@ -41,8 +43,33 @@ const MovieDetails = () => {
           />
         </div>
         <div>
-          <h1 className="mb-4 text-3xl font-bold">The Shawshank Redemption</h1>
+          <h1 className="mb-4 text-3xl font-bold">{movie?.title}</h1>
           <p className="mb-6 text-lg text-justify text-muted-foreground">{movie?.overview}</p>
+          <div>
+            <div className="flex items-center py-5 ">
+              {Array.from({ length: numStars }, (_, index) => (
+                <IoStarSharp key={`full-${index}`} fill="yellow" className="text-yellow-400 shadow-md" />
+              ))}
+
+              {Array.from({ length: 5 - numStars }, (_, index) => (
+                <RiStarSLine key={`empty-${index}`} className="text-gray-400 shadow-md" />
+              ))}
+            </div>
+            <h2 className="text-2xl font-semibold">Gêneros</h2>
+            <ul className="flex gap-3">
+              {movie?.genres.map((genre) => (
+                <li className="text-xl" key={genre.id}>
+                  {genre.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p>Data de Lançamento:{movie?.release_date}</p>
+            {movie?.production_countries.map((companie) => (
+              <p>{companie.name}</p>
+            ))}
+          </div>
         </div>
       </div>
     </div>

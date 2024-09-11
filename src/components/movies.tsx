@@ -12,13 +12,13 @@ const Movies = ({ movie }: movieProps) => {
   return (
     <div className="relative w-full">
       <img
-        className="rounded-lg w-full"
+        className="w-full rounded-lg"
         src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
         alt={movie.title}
       />
-      <div className="absolute bottom-0 left-0 text-sm  bg-black bg-opacity-80 pl-1 pb-2 text-white w-full rounded-b-lg">
-        <p className="truncate font-bold">{movie.title}</p>
-        <div className="flex items-center">
+      <div className="absolute bottom-0 left-0 w-full pb-2 pl-1 text-sm text-white bg-black rounded-b-lg text-start bg-opacity-80">
+        <p className="font-bold truncate">{movie.title}</p>
+        <div className="flex items-center ">
           {Array.from({ length: numStars }, (_, index) => (
             <IoStarSharp key={`full-${index}`} fill="yellow" className="text-yellow-400 shadow-md" />
           ))}

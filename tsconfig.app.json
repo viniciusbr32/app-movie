@@ -18,7 +18,13 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Path mapping */
+    "baseUrl": ".", // Adiciona a baseUrl
+    "paths": {
+      "@/*": ["./src/*"] // Adiciona o mapeamento de paths
+    }
   },
   "include": ["src"]
 }

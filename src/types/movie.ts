@@ -10,7 +10,7 @@ export interface Movie {
 export interface MovieDetailsProps {
   adult: boolean;
   backdrop_path: string;
-  belongs_to_collection: null | object; // Ajustar se necessário
+  belongs_to_collection: null | object;
   budget: number;
   genres: { id: number; name: string }[];
   homepage: string;
@@ -31,6 +31,11 @@ export interface MovieDetailsProps {
   tagline: string;
   title: string;
   video: boolean;
-  vote_average: number;
+  vote_average: number | undefined;
   vote_count: number;
+}
+
+export interface MoviePages {
+  page: number | undefined;
+  total_pages: number | undefined;
 }
